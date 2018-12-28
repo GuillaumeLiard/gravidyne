@@ -11,20 +11,31 @@ export default {
 			const { Bodies } = Matter
 
 			let circle = {
-				px: 0.5,
-				py: 0.5,
-				pradius: 0.4
+				geometry: {
+					px: 0.5,
+					py: 0.5,
+					pradius: 0.2,
+				},
+				physic: {
+					friction: 0.1,
+					frictionAir: 0.001,
+					restitution: 0,
+				}
 			}
 
-			circle.x = circle.px * width
-			circle.y = circle.py * height
-			circle.radius = circle.pradius * height
+			circle.geometry = {
+				...circle.geometry,
+				x: (() => circle.geometry.px * width)(),
+				y: (() => circle.geometry.py * height)(),
+				radius: (() => circle.geometry.pradius * height)(),
+			}
 
-			circle.body = Bodies.circle(circle.x, circle.y, circle.radius)
+			const { geometry, physic } = circle
 
-			circle.body.friction = 0.1;
-			circle.body.frictionAir = 0.001;
-			circle.body.restitution = 0;
+			circle.body = Bodies.circle(geometry.x, geometry.y, geometry.radius)
+			for (let prop of Object.getOwnPropertyNames(physic)) {
+				circle.body[prop] = physic[prop]
+			}
 
 			let axe = {
 				px: 0.5,
