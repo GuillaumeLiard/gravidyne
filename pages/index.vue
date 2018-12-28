@@ -1,12 +1,15 @@
 <template>
 	<div class="index">
-		main
+		<Matter/>
 	</div>
 </template>
 
 <script>
+	import Matter from '~/components/Matter'
+
 	export default {
 		components: {
+			Matter
 		}
 	}
 </script>
