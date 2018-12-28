@@ -8,6 +8,8 @@ export default {
 	methods: {
 		makeCircle: function(width, height) {
 			const { Matter } = this
+			const { Bodies } = Matter
+
 			let circle = {
 				px: 0.5,
 				py: 0.5,
@@ -18,8 +20,27 @@ export default {
 			circle.y = circle.py * height
 			circle.radius = circle.pradius * height
 
-			let Bodies = Matter.Bodies
 			circle.body = Bodies.circle(circle.x, circle.y, circle.radius)
+
+			let axe = {
+				px: 0.5,
+				py: 0.5,
+				pradius: 0.1
+			}
+
+			axe.x = axe.px * width
+			axe.y = axe.py * height
+
+			const { Constraint } = Matter
+			const axisConstraint = Constraint.create({
+				pointA: axe,
+				bodyB: circle.body,
+				// angularStiffness: 0,
+				stiffness: 1,
+				// damping: 0.1,
+			})
+
+			circle.axisConstraint = axisConstraint
 
 			return circle
 		}
@@ -56,8 +77,9 @@ export default {
 				options: {
 					width,
 					height,
-					showVelocity: true
-				}
+					showVelocity: true,
+					// wireframes: false
+				},
 			})
 
 			Render.run(render)
@@ -66,9 +88,11 @@ export default {
 			let runner = Runner.create()
 			Runner.run(runner, engine)
 
+			let circle = makeCircle(width, height)
+
 			// add bodies
 			World.add(world, [
-				makeCircle(width, height).body,
+				circle.body,
 
 				Bodies.rectangle(200, 100, 60, 60, { frictionAir: 0.001 }),
 				Bodies.rectangle(400, 100, 60, 60, { frictionAir: 0.05 }),
@@ -87,6 +111,7 @@ export default {
 				mouse: mouse,
 				constraint: {
 					stiffness: 0.2,
+					angularStiffness: 0,
 					render: {
 						visible: false
 					}
@@ -94,6 +119,7 @@ export default {
 			})
 
 			World.add(world, mouseConstraint)
+			World.add(world, circle.axisConstraint)
 
 			// keep the mouse in sync with rendering
 			render.mouse = mouse
