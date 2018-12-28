@@ -22,6 +22,10 @@ export default {
 
 			circle.body = Bodies.circle(circle.x, circle.y, circle.radius)
 
+			circle.body.friction = 0.1;
+			circle.body.frictionAir = 0.001;
+			circle.body.restitution = 0;
+
 			let axe = {
 				px: 0.5,
 				py: 0.5,
@@ -41,6 +45,8 @@ export default {
 			})
 
 			circle.axisConstraint = axisConstraint
+
+
 
 			return circle
 		}
