@@ -1,22 +1,16 @@
 # gravidyne
 
-> minimalist gravidyne list progressive web app
+> [WIP] mechanical experiment
 
 https://guillaumeliard.github.io/gravidyne
 
-Add gravidyne and manage them
-
-Can be saved as an app from the browser to the user operating system (pwa).
-
-gravidyne user data is locally saved inside browser's localstorage.
 
 ## Technologies
 
+matter-js
 nuxt (vue, vuex, ...)
-vuex-persistedstate (for localstorage data sync)
 vuetify (material design framework)
 pwa module (workbox, icon, ...)
-vuedraggable
 ...
 
 ## Build Setup
