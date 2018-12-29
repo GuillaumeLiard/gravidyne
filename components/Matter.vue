@@ -1,10 +1,30 @@
 <template>
-	<div ref="mainArea"/>
+	<div ref="mainArea">
+		<div class="virtual">
+			<MatterCircle
+				:width="width"
+				:height="height"
+				:world="world"
+				/>
+		</div>
+	</div>
 </template>
 
 <script>
+import MatterCircle from '~/components/MatterCircle'
+
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
+	components: {
+		MatterCircle,
+	},
+	data: function() {
+		return {
+			width: 800,
+			height: 600,
+			world: null
+		}
+	},
 	methods: {
 		makeCircle: function(width, height) {
 			const { Matter } = this
@@ -62,20 +82,92 @@ export default {
 			return circle
 		}
 	},
+	// computed: {
+	// 	bodies: function() {
+	// 		console.log("this.$store.getters['instances/getBodies']", this.$store.getters['instances/getBodies'])
+	// 		return this.$store.getters['instances/getBodies']
+	// 	}
+	// },
+	// watch: {
+	// 	bodies: function() {
+	// 		// const { World } = this.Matter
+	// 		console.log("[...this.bodies]", [...this.bodies]);
+	// 		console.log("this.World", this.World);
+	// 		this.World.add(this.world, [...this.bodies])
+	// 	}
+	// },
 	mounted: function() {
+		const { Render,
+			Runner,
+			Mouse,
+			MouseConstraint,
+			World,
+		} = this.Matter
+		const { mainArea } = this.$refs
+		const {
+			engine,
+			world,
+			width,
+			height,
+		} = this
+		// create renderer
+		let render = Render.create({
+			element: mainArea,
+			// element: document.body,
+			engine: engine,
+			options: {
+				width,
+				height,
+				showVelocity: true,
+				// wireframes: false
+			},
+		})
+		Render.run(render)
+
+		let runner = Runner.create()
+
+		Runner.run(runner, engine)
+
+		// add mouse control
+		let mouse = Mouse.create(render.canvas),
+		mouseConstraint = MouseConstraint.create(engine, {
+			mouse: mouse,
+			constraint: {
+				stiffness: 0.2,
+				angularStiffness: 0,
+				render: {
+					visible: false
+				}
+			}
+		})
+		World.add(world, mouseConstraint)
+		// World.add(world, circle.axisConstraint)
+
+		// keep the mouse in sync with rendering
+		render.mouse = mouse
+
+		// fit the render viewport to the scene
+		Render.lookAt(render, {
+			min: { x: 0, y: 0 },
+			max: { x: 800, y: 600 }
+		})
+	},
+	beforeMount: function() {
+		// this.bodies
+		console.log('matter before mounted')
 		this.Matter = require('matter-js')
 		const { Matter } = this
 		let Example = Example || {}
-		const { mainArea } = this.$refs
+
 
 		const width = 800
 		const height = 600
 
 		const { makeCircle } = this
 
-		Example.airFriction = function() {
+		const build = function() {
 			let Engine = Matter.Engine,
-			Render = Matter.Render,
+			// Render = Matter.Render,
 			Runner = Matter.Runner,
 			MouseConstraint = Matter.MouseConstraint,
 			Mouse = Matter.Mouse,
@@ -86,30 +178,33 @@ export default {
 			let engine = Engine.create(),
 			world = engine.world
 
-			// create renderer
-			let render = Render.create({
-				element: mainArea,
-				// element: document.body,
-				engine: engine,
-				options: {
-					width,
-					height,
-					showVelocity: true,
-					// wireframes: false
-				},
-			})
+			// // create renderer
+			// let render = Render.create({
+			// 	element: mainArea,
+			// 	// element: document.body,
+			// 	engine: engine,
+			// 	options: {
+			// 		width,
+			// 		height,
+			// 		showVelocity: true,
+			// 		// wireframes: false
+			// 	},
+			// })
+			// Render.run(render)
+			// Runner.run(runner, engine)
 
-			Render.run(render)
+
+			// Render.run(render)
 
 			// create runner
-			let runner = Runner.create()
-			Runner.run(runner, engine)
+			// let runner = Runner.create()
+			// Runner.run(runner, engine)
 
-			let circle = makeCircle(width, height)
+			// let circle = makeCircle(width, height)
 
 			// add bodies
 			World.add(world, [
-				circle.body,
+				// circle.body,
 
 				Bodies.rectangle(200, 100, 60, 60, { frictionAir: 0.001 }),
 				Bodies.rectangle(400, 100, 60, 60, { frictionAir: 0.05 }),
@@ -122,45 +217,32 @@ export default {
 				Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
 			])
 
-			// add mouse control
-			let mouse = Mouse.create(render.canvas),
-			mouseConstraint = MouseConstraint.create(engine, {
-				mouse: mouse,
-				constraint: {
-					stiffness: 0.2,
-					angularStiffness: 0,
-					render: {
-						visible: false
-					}
-				}
-			})
 
-			World.add(world, mouseConstraint)
-			World.add(world, circle.axisConstraint)
 
-			// keep the mouse in sync with rendering
-			render.mouse = mouse
 
-			// fit the render viewport to the scene
-			Render.lookAt(render, {
-				min: { x: 0, y: 0 },
-				max: { x: 800, y: 600 }
-			})
+
+			// this.world = world
 
 			// context for MatterTools.Demo
 			return {
+				World: World,
+				world: world,
 				engine: engine,
-				runner: runner,
-				render: render,
-				canvas: render.canvas,
-				stop: function() {
-					Matter.Render.stop(render)
-					Matter.Runner.stop(runner)
-				}
+				// Runner: Runner,
+				// runner: runner,
+				// Render: Render,
+				// render: render,
+				// canvas: render.canvas,
+				// stop: function() {
+				// 	Matter.Render.stop(render)
+				// 	Matter.Runner.stop(runner)
+				// }
 			}
 		}
-		Example.airFriction()
-		console.log('air friction')
+		this.param = build()
+		this.World = this.param.World
+		this.world = this.param.world
+		this.engine = this.param.engine
 	}
 }
 </script>

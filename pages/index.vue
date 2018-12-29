@@ -1,6 +1,8 @@
 <template>
 	<div class="index">
-		<Matter/>
+		<no-ssr>
+			<Matter/>
+		</no-ssr>
 	</div>
 </template>
 
