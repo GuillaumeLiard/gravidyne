@@ -7,7 +7,8 @@
 				:world="world"
 				:width="width"
 				:height="height"
-				:geometry="body.geometry"
+				:geometryPercent="body.geometryPercent"
+				:physic="body.physic"
 				/>
 		</div>
 	</div>

@@ -18,42 +18,24 @@
 				type: Number,
 				default: () => 0
 			},
-			geometry: {
+			geometryPercent: {
 				type: Object,
-				// default: () => {}
-				default: () => ({
-					px: 0.5,
-					py: 0.5,
-					pradius: 0.2,
-				})
+				default: () => {}
 			},
-			// physic: {
-			// 	friction: 0.1,
-			// 	frictionAir: 0.001,
-			// 	restitution: 0,
-			// }
-		},
-		data: function() {
-			return {
-				px: 0.5,
-				py: 0.5,
-				pradius: 0.2,
-				physic: {
-					friction: 0.1,
-					frictionAir: 0.001,
-					restitution: 0,
-				}
-			}
+			physic: {
+				type: Object,
+				default: () => {}
+			},
 		},
 		computed: {
 			x: function() {
-				return this.geometry.px * this.width
+				return this.geometryPercent.x * this.width
 			},
 			y: function() {
-				return this.geometry.py * this.height
+				return this.geometryPercent.y * this.height
 			},
 			radius: function() {
-				return this.geometry.pradius * this.height
+				return this.geometryPercent.radius * this.height
 			},
 			body: function() {
 				let body = Bodies.circle(this.x, this.y, this.radius)

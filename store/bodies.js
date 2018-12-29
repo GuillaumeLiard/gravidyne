@@ -4,11 +4,16 @@ export const state = function() {
 		bodies: [
 			{
 				type: 'circle',
-				geometry: {
-					px: 0.5,
-					py: 0.5,
-					pradius: 0.1,
+				geometryPercent: {
+					x: 0.5,
+					y: 0.5,
+					radius: 0.2,
 				},
+				physic: {
+					friction: 0.1,
+					frictionAir: 0.001,
+					restitution: 1,
+				}
 			}
 		]
 	}
