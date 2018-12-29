@@ -60,9 +60,6 @@ export default {
 			let Example = Example || {}
 
 
-			const width = 800
-			const height = 600
-
 			const build = function() {
 				let Engine = Matter.Engine,
 				Runner = Matter.Runner,
