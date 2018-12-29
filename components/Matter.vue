@@ -1,7 +1,7 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
-			<MatterBodyCircle
+			<MatterBodyRectangle
 				v-for="(body, index) in bodies"
 				:key="index"
 				:world="world"
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import MatterBodyCircle from '~/components/MatterBodyCircle'
+import MatterBodyRectangle from '~/components/MatterBodyRectangle'
 
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
 	components: {
-		MatterBodyCircle,
+		MatterBodyRectangle,
 	},
 	data: function() {
 		return {
@@ -72,7 +72,7 @@ export default {
 					Bodies.rectangle(600, 100, 60, 60, { frictionAir: 0.1 }),
 
 					// walls
-					Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+					// Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
 					Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
 					Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
 					Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
