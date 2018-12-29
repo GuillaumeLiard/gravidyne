@@ -2,9 +2,12 @@
 	<div ref="mainArea">
 		<div class="virtual">
 			<MatterCircle
+				v-for="(body, index) in bodies"
+				:key="index"
 				:world="world"
 				:width="width"
 				:height="height"
+				:geometry="body.geometry"
 				/>
 		</div>
 	</div>
@@ -23,6 +26,11 @@ export default {
 			width: 800,
 			height: 600,
 			world: null
+		}
+	},
+	computed: {
+		bodies: function() {
+			return this.$store.getters['bodies/getBodies']
 		}
 	},
 	beforeMount: function() {

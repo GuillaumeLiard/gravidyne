@@ -20,7 +20,12 @@
 			},
 			geometry: {
 				type: Object,
-				default: () => {}
+				// default: () => {}
+				default: () => ({
+					px: 0.5,
+					py: 0.5,
+					pradius: 0.2,
+				})
 			},
 			// physic: {
 			// 	friction: 0.1,
@@ -42,13 +47,13 @@
 		},
 		computed: {
 			x: function() {
-				return this.px * this.width
+				return this.geometry.px * this.width
 			},
 			y: function() {
-				return this.py * this.height
+				return this.geometry.py * this.height
 			},
 			radius: function() {
-				return this.pradius * this.height
+				return this.geometry.pradius * this.height
 			},
 			body: function() {
 				let body = Bodies.circle(this.x, this.y, this.radius)
