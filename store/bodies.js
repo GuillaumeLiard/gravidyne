@@ -66,6 +66,42 @@ export const state = function() {
 					restitution: 1
 				}
 			},
+			{
+				type: 'Rectangle',
+				geometryPercent: {
+					x: 0.25,
+					y: 1 / 6,
+					width: 0.08,
+					height: 0.1,
+				},
+				physic: {
+					frictionAir: 0.001
+				}
+			},
+			{
+				type: 'Rectangle',
+				geometryPercent: {
+					x: 0.50,
+					y: 1 / 6,
+					width: 0.08,
+					height: 0.1,
+				},
+				physic: {
+					frictionAir: 0.05
+				}
+			},
+			{
+				type: 'Rectangle',
+				geometryPercent: {
+					x: 0.75,
+					y: 1 / 6,
+					width: 0.08,
+					height: 0.1,
+				},
+				physic: {
+					frictionAir: 0.1
+				}
+			},
 		]
 	}
 }
