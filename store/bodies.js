@@ -3,7 +3,7 @@ export const state = function() {
 		// bodies: [],
 		bodies: [
 			{
-				type: 'circle',
+				type: 'Circle',
 				geometryPercent: {
 					x: 0.5,
 					y: 0.5,
@@ -12,7 +12,7 @@ export const state = function() {
 				physic: {
 					friction: 0.1,
 					frictionAir: 0.001,
-					restitution: 0,
+					restitution: 1,
 				}
 			}
 		]
