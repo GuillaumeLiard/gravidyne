@@ -1,8 +1,9 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
-			<MatterBodyRectangle
+			<component
 				v-for="(body, index) in bodies"
+				:is="getComponentByType(body.type)"
 				:key="index"
 				:world="world"
 				:width="width"
@@ -16,11 +17,13 @@
 
 <script>
 import MatterBodyRectangle from '~/components/MatterBodyRectangle'
+import MatterBodyCircle from '~/components/MatterBodyCircle'
 
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
 	components: {
 		MatterBodyRectangle,
+		MatterBodyCircle,
 	},
 	data: function() {
 		return {
@@ -41,6 +44,14 @@ export default {
 		this.initMatterRender();
 	},
 	methods: {
+		getComponentByType: function(type) {
+			switch(type) {
+				case 'Circle' :
+					return MatterBodyCircle
+				case 'Rectangle' :
+					return MatterBodyRectangle
+			}
+		},
 		initMatterWorld: function() {
 			// this.bodies
 			console.log('matter before mounted')
@@ -73,9 +84,9 @@ export default {
 
 					// walls
 					// Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
-					Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
-					Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
-					Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+					// Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+					// Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+					// Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
 				])
 				return {
 					World: World,

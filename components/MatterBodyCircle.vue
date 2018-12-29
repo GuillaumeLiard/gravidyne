@@ -14,8 +14,8 @@
 					radius: this.geometryPercent.radius * this.height,
 				}
 			},
-			createBody: function() {
-				return Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius)
+			createBody: function(physic) {
+				return Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius, {...physic})
 			},
 		},
 	}

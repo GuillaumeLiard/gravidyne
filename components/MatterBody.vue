@@ -32,9 +32,8 @@
 				return this.computeGeometry();
 			},
 			body: function() {
-				let body = this.createBody()
-				this.applyPhysic(body)
-				return body
+				// let body = this.createBody(this.physic)
+				return this.createBody(this.physic)
 			},
 		},
 		beforeMount: function() {
@@ -52,20 +51,10 @@
 				this.World = World
 			},
 			computeGeometry: function() {
-				// const { gp } = this.geometryPercent
-				// return {
-				// 	x: this.geometryPercent.x * this.width,
-				// 	y: this.geometryPercent.y * this.height,
-				// 	radius: this.geometryPercent.radius * this.height,
-				// }
+				// Virtual method to implement in extended component
 			},
 			createBody: function() {
-				// return Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius)
-			},
-			applyPhysic: function(body) {
-				for (let prop of Object.getOwnPropertyNames({...this.physic})) {
-					body[prop] = this.physic[prop]
-				}
+				// Virtual method to implement in extended component
 			},
 			addBody: function() {
 				const { World } = this

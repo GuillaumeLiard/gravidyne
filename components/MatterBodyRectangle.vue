@@ -15,8 +15,8 @@
 					height: this.geometryPercent.height * this.height,
 				}
 			},
-			createBody: function() {
-				return Bodies.rectangle(this.geometry.x, this.geometry.y, this.geometry.width, this.geometry.height)
+			createBody: function(physic) {
+				return Bodies.rectangle(this.geometry.x, this.geometry.y, this.geometry.width, this.geometry.height, {...physic})
 			},
 		},
 	}
