@@ -28,17 +28,16 @@
 			},
 		},
 		computed: {
-			x: function() {
-				return this.geometryPercent.x * this.width
-			},
-			y: function() {
-				return this.geometryPercent.y * this.height
-			},
-			radius: function() {
-				return this.geometryPercent.radius * this.height
+			geometry: function() {
+				const { gp } = this.geometryPercent
+				return {
+					x: this.geometryPercent.x * this.width,
+					y: this.geometryPercent.y * this.height,
+					radius: this.geometryPercent.radius * this.height,
+				}
 			},
 			body: function() {
-				let body = Bodies.circle(this.x, this.y, this.radius)
+				let body = Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius)
 				for (let prop of Object.getOwnPropertyNames({...this.physic})) {
 					body[prop] = this.physic[prop]
 				}
