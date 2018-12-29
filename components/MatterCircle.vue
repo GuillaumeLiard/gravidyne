@@ -9,12 +9,18 @@
 			world: {
 				type: Object,
 				default: () => null
-			}
+			},
+			width: {
+				type: Number,
+				default: () => 0
+			},
+			height: {
+				type: Number,
+				default: () => 0
+			},
 		},
 		data: function() {
 			return {
-				height: 500,
-				width: 500,
 				px: 0.5,
 				py: 0.5,
 				pradius: 0.2,
@@ -40,9 +46,6 @@
 				for (let prop of Object.getOwnPropertyNames({...this.physic})) {
 					body[prop] = this.physic[prop]
 				}
-				// for (let prop of Object.getOwnPropertyNames(this.physic)) {
-				// 	body[prop] = this.physic[prop]
-				// }
 				return body
 			},
 		},
