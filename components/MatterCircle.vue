@@ -29,18 +29,11 @@
 		},
 		computed: {
 			geometry: function() {
-				const { gp } = this.geometryPercent
-				return {
-					x: this.geometryPercent.x * this.width,
-					y: this.geometryPercent.y * this.height,
-					radius: this.geometryPercent.radius * this.height,
-				}
+				return this.computeGeometry();
 			},
 			body: function() {
-				let body = Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius)
-				for (let prop of Object.getOwnPropertyNames({...this.physic})) {
-					body[prop] = this.physic[prop]
-				}
+				let body = this.createBody()
+				this.applyPhysic(body)
 				return body
 			},
 		},
@@ -57,6 +50,22 @@
 			init: function() {
 				const { World } = require('matter-js')
 				this.World = World
+			},
+			computeGeometry: function() {
+				const { gp } = this.geometryPercent
+				return {
+					x: this.geometryPercent.x * this.width,
+					y: this.geometryPercent.y * this.height,
+					radius: this.geometryPercent.radius * this.height,
+				}
+			},
+			createBody: function() {
+				return Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius)
+			},
+			applyPhysic: function(body) {
+				for (let prop of Object.getOwnPropertyNames({...this.physic})) {
+					body[prop] = this.physic[prop]
+				}
 			},
 			addBody: function() {
 				const { World } = this

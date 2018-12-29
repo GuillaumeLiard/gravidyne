@@ -12,7 +12,7 @@ export const state = function() {
 				physic: {
 					friction: 0.1,
 					frictionAir: 0.001,
-					restitution: 1,
+					restitution: 0,
 				}
 			}
 		]
