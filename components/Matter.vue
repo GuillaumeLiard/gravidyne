@@ -1,7 +1,7 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
-			<MatterCircle
+			<MatterBodyCircle
 				v-for="(body, index) in bodies"
 				:key="index"
 				:world="world"
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import MatterCircle from '~/components/MatterCircle'
+import MatterBodyCircle from '~/components/MatterBodyCircle'
 
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
 	components: {
-		MatterCircle,
+		MatterBodyCircle,
 	},
 	data: function() {
 		return {
