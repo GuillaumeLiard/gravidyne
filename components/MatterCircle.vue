@@ -18,6 +18,15 @@
 				type: Number,
 				default: () => 0
 			},
+			geometry: {
+				type: Object,
+				default: () => {}
+			},
+			// physic: {
+			// 	friction: 0.1,
+			// 	frictionAir: 0.001,
+			// 	restitution: 0,
+			// }
 		},
 		data: function() {
 			return {
@@ -49,14 +58,28 @@
 				return body
 			},
 		},
-		methods: {
-			addBody: function() {
-				const { World } = require('matter-js')
-				World.add(this.world, this.body)
-			}
+		beforeMount: function() {
+			this.init()
 		},
 		mounted: function() {
 			this.addBody()
+		},
+		beforeDestroy: function() {
+			this.removeBody()
+		},
+		methods: {
+			init: function() {
+				const { World } = require('matter-js')
+				this.World = World
+			},
+			addBody: function() {
+				const { World } = this
+				World.add(this.world, this.body)
+			},
+			removeBody: function() {
+				const { World } = this
+				World.remove(this.world, this.body)
+			},
 		},
 	}
 </script>
