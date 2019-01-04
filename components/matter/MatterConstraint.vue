@@ -25,7 +25,7 @@
 		},
 		computed: {
 			constraint: function() {
-				return this.createConstraint()
+				return this.createConstraint(this.physic)
 			},
 			bodyB: function() {
 				return Composite.get(this.world, this.idBodyB, 'body')
@@ -48,7 +48,7 @@
 				return Constraint.create({
 					pointA: this.pointA,
 					bodyB: this.bodyB,
-					stiffness: 0.5,
+					...physic,
 				})
 			},
 		},

@@ -23,6 +23,7 @@
 				v-for="(constraint, indexConstraint) in constraints"
 				:key="indexConstraint"
 				:world="world"
+				:physic="constraint.physic"
 				:pointA="constraint.pointA"
 				/>
 			</div>
