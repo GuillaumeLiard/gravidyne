@@ -12,7 +12,9 @@ export const state = function() {
 
 				},
 				physic: {
-					stiffness: 1,
+					// angularStiffness: 0,
+					stiffness: 0.5,
+					// damping: 0.1,
 				}
 			},
 		]

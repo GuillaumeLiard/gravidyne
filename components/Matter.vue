@@ -24,7 +24,6 @@
 				:key="indexConstraint"
 				:world="world"
 				:pointA="constraint.pointA"
-				:bodyB="constraint.bodyB"
 				/>
 			</div>
 		</div>
