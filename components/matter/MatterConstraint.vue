@@ -10,11 +10,19 @@
 				type: Object,
 				default: () => null
 			},
+			width: {
+				type: Number,
+				default: () => 0
+			},
+			height: {
+				type: Number,
+				default: () => 0
+			},
 			physic: {
 				type: Object,
 				default: () => {}
 			},
-			pointA: {
+			geometryPercentPointA: {
 				type: Object,
 				default: () => {}
 			},
@@ -29,6 +37,12 @@
 			},
 			bodyB: function() {
 				return Composite.get(this.world, this.idBodyB, 'body')
+			},
+			pointA: function() {
+				return {
+					x: this.geometryPercentPointA.x * this.width,
+					y: this.geometryPercentPointA.y * this.height,
+				}
 			},
 		},
 		mounted: function() {

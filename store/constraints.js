@@ -2,9 +2,11 @@ export const state = function() {
 	return {
 		constraints: [
 			{
-				pointA: {
-					x: 300,
-					y: 300,
+				geometryPercentPointA: {
+					x: 0.5,
+					y: 0.5,
+					// x: 300,
+					// y: 300,
 					// px: 0.5,
 					// py: 0.5,
 				},
@@ -12,6 +14,7 @@ export const state = function() {
 				physic: {
 					// angularStiffness: 0,
 					stiffness: 0.5,
+					// stiffness: 0.5,
 					// damping: 0.1,
 				}
 			},

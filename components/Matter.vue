@@ -18,8 +18,10 @@
 				v-for="(constraint, index) in constraints"
 				:key="index"
 				:world="world"
+				:width="width"
+				:height="height"
 				:physic="constraint.physic"
-				:pointA="constraint.pointA"
+				:geometryPercentPointA="constraint.geometryPercentPointA"
 				:idBodyB="constraint.idBodyB"
 				/>
 			</div>
