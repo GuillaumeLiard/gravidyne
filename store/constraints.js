@@ -8,9 +8,7 @@ export const state = function() {
 					// px: 0.5,
 					// py: 0.5,
 				},
-				bodyB: {
-
-				},
+				idBodyB: 1,
 				physic: {
 					// angularStiffness: 0,
 					stiffness: 0.5,

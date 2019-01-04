@@ -14,17 +14,13 @@
 				/>
 			</div>
 			<div class="constraints">
-				<!-- <MatterConstraint
-				v-for="(constraint, indexConstraint) in constraints"
-				:key="indexConstraint"
-
-				/> -->
 				<MatterConstraint
-				v-for="(constraint, indexConstraint) in constraints"
-				:key="indexConstraint"
+				v-for="(constraint, index) in constraints"
+				:key="index"
 				:world="world"
 				:physic="constraint.physic"
 				:pointA="constraint.pointA"
+				:idBodyB="constraint.idBodyB"
 				/>
 			</div>
 		</div>

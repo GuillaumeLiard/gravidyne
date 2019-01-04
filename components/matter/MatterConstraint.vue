@@ -20,7 +20,7 @@
 			},
 			idBodyB: {
 				type: Number,
-				default: 1
+				default: 8
 			},
 		},
 		computed: {
