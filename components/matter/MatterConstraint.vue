@@ -53,7 +53,9 @@
 		},
 		methods: {
 			addConstraint: function() {
-				World.add(this.world, this.constraint)
+				setTimeout(() => {
+					World.add(this.world, this.constraint)
+				}, 0)
 			},
 			removeConstraint: function() {
 				World.remove(this.world, this.constraint)
