@@ -156,61 +156,6 @@ export default {
 				max: { x: 800, y: 600 }
 			})
 		},
-		// makeCircle: function(width, height) {
-		// 	const { Matter } = this
-		// 	const { Bodies } = Matter
-		// 	//
-		// 	// let circle = {
-		// 	// 	geometry: {
-		// 	// 		px: 0.5,
-		// 	// 		py: 0.5,
-		// 	// 		pradius: 0.2,
-		// 	// 	},
-		// 	// 	physic: {
-		// 	// 		friction: 0.1,
-		// 	// 		frictionAir: 0.001,
-		// 	// 		restitution: 0,
-		// 	// 	}
-		// 	// }
-		// 	//
-		// 	// circle.geometry = {
-		// 	// 	...circle.geometry,
-		// 	// 	x: (() => circle.geometry.px * width)(),
-		// 	// 	y: (() => circle.geometry.py * height)(),
-		// 	// 	radius: (() => circle.geometry.pradius * height)(),
-		// 	// }
-		// 	//
-		// 	// const { geometry, physic } = circle
-		// 	//
-		// 	// circle.body = Bodies.circle(geometry.x, geometry.y, geometry.radius)
-		// 	// for (let prop of Object.getOwnPropertyNames(physic)) {
-		// 	// 	circle.body[prop] = physic[prop]
-		// 	// }
-		//
-		// 	let axe = {
-		// 		px: 0.5,
-		// 		py: 0.5,
-		// 		pradius: 0.1
-		// 	}
-		//
-		// 	axe.x = axe.px * width
-		// 	axe.y = axe.py * height
-		//
-		// 	const { Constraint } = Matter
-		// 	const axisConstraint = Constraint.create({
-		// 		pointA: axe,
-		// 		bodyB: circle.body,
-		// 		// angularStiffness: 0,
-		// 		stiffness: 1,
-		// 		// damping: 0.1,
-		// 	})
-		//
-		// 	circle.axisConstraint = axisConstraint
-		//
-		//
-		//
-		// 	return circle
-		// }
 	},
 
 
