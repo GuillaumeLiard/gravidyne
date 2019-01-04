@@ -1,7 +1,8 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
-			<component
+			<div class="bodies">
+				<component
 				v-for="(body, index) in bodies"
 				:is="getComponentByType(body.type)"
 				:key="index"
@@ -11,6 +12,21 @@
 				:geometryPercent="body.geometryPercent"
 				:physic="body.physic"
 				/>
+			</div>
+			<div class="constraints">
+				<!-- <MatterConstraint
+				v-for="(constraint, indexConstraint) in constraints"
+				:key="indexConstraint"
+
+				/> -->
+				<MatterConstraint
+				v-for="(constraint, indexConstraint) in constraints"
+				:key="indexConstraint"
+				:world="world"
+				:pointA="constraint.pointA"
+				:bodyB="constraint.bodyB"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -18,30 +34,35 @@
 <script>
 import MatterBodyRectangle from '~/components/MatterBodyRectangle'
 import MatterBodyCircle from '~/components/MatterBodyCircle'
+import MatterConstraint from '~/components/matter/MatterConstraint'
 
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
 	components: {
 		MatterBodyRectangle,
 		MatterBodyCircle,
+		MatterConstraint,
 	},
 	data: function() {
 		return {
 			width: 800,
 			height: 600,
-			world: null
+			world: null,
 		}
 	},
 	computed: {
 		bodies: function() {
 			return this.$store.getters['bodies/getBodies']
+		},
+		constraints: function() {
+			return this.$store.getters['constraints/getConstraints']
 		}
 	},
 	beforeMount: function() {
-		this.initMatterWorld();
+		this.initMatterWorld()
 	},
 	mounted: function() {
-		this.initMatterRender();
+		this.initMatterRender()
 	},
 	methods: {
 		getComponentByType: function(type) {
