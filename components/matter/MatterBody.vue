@@ -1,5 +1,5 @@
 <script>
-	import { Bodies } from 'matter-js'
+	import { World, Bodies } from 'matter-js'
 
 	export default {
 		render: function() {
@@ -32,12 +32,8 @@
 				return this.computeGeometry();
 			},
 			body: function() {
-				// let body = this.createBody(this.physic)
 				return this.createBody(this.physic)
 			},
-		},
-		beforeMount: function() {
-			this.init()
 		},
 		mounted: function() {
 			this.addBody()
@@ -46,23 +42,17 @@
 			this.removeBody()
 		},
 		methods: {
-			init: function() {
-				const { World } = require('matter-js')
-				this.World = World
+			addBody: function() {
+				World.add(this.world, this.body)
+			},
+			removeBody: function() {
+				World.remove(this.world, this.body)
 			},
 			computeGeometry: function() {
 				// Virtual method to implement in extended component
 			},
 			createBody: function() {
 				// Virtual method to implement in extended component
-			},
-			addBody: function() {
-				const { World } = this
-				World.add(this.world, this.body)
-			},
-			removeBody: function() {
-				const { World } = this
-				World.remove(this.world, this.body)
 			},
 		},
 	}
