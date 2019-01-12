@@ -1,7 +1,7 @@
 <script>
 	import { Bodies } from 'matter-js'
 
-	import MatterBody from '~/components/matter/MatterBody'
+	import MatterBody from '~/components/Matter/MatterBody'
 
 	export default {
 		extends: MatterBody,

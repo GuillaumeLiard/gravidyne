@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Airfriction from '~/components/matter/examples/Airfriction'
+import Airfriction from '~/components/Matter/examples/Airfriction'
 
 export default {
 	components: {

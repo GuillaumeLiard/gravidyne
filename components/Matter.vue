@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import MatterBodyRectangle from '~/components/matter/MatterBodyRectangle'
-import MatterBodyCircle from '~/components/matter/MatterBodyCircle'
-import MatterConstraint from '~/components/matter/MatterConstraint'
+import MatterBodyRectangle from '~/components/Matter/MatterBodyRectangle'
+import MatterBodyCircle from '~/components/Matter/MatterBodyCircle'
+import MatterConstraint from '~/components/Matter/MatterConstraint'
 
 // https://github.com/liabru/matter-js/blob/master/examples/airFriction.js
 export default {
