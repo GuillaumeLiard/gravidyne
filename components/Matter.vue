@@ -30,6 +30,14 @@
 </template>
 
 <script>
+import {
+	Engine,
+	Runner,
+	Mouse,
+	MouseConstraint,
+	World,
+	Render
+} from 'matter-js'
 import MatterBodyRectangle from '~/components/Matter/MatterBodyRectangle'
 import MatterBodyCircle from '~/components/Matter/MatterBodyCircle'
 import MatterConstraint from '~/components/Matter/MatterConstraint'
@@ -57,7 +65,7 @@ export default {
 		}
 	},
 	beforeMount: function() {
-		this.initMatterWorld()
+		this.initMatterEngine()
 	},
 	mounted: function() {
 		this.initMatterRender()
@@ -71,72 +79,46 @@ export default {
 					return MatterBodyRectangle
 			}
 		},
-		initMatterWorld: function() {
-			// this.bodies
-			console.log('matter before mounted')
-			this.Matter = require('matter-js')
-			const { Matter } = this
-			let Example = Example || {}
-
-
-			const build = function() {
-				let Engine = Matter.Engine,
-				Runner = Matter.Runner,
-				MouseConstraint = Matter.MouseConstraint,
-				Mouse = Matter.Mouse,
-				World = Matter.World,
-				Bodies = Matter.Bodies
-
-				// create engine
-				let engine = Engine.create(),
-				world = engine.world
-
-				return {
-					World: World,
-					world: world,
-					engine: engine,
-				}
-			}
-			this.param = build()
-			this.World = this.param.World
-			this.world = this.param.world
-			this.engine = this.param.engine
+		initMatterEngine: function() {
+			this.engine = Engine.create()
+			this.world = this.engine.world
 		},
+
 		initMatterRender: function() {
-			const { Render,
-				Runner,
-				Mouse,
-				MouseConstraint,
-				World,
-			} = this.Matter
 			const { mainArea } = this.$refs
-			const {
+			let {
 				engine,
-				world,
 				width,
 				height,
 			} = this
-			// create renderer
-			let render = Render.create({
+
+			let render = this.render = Render.create({
 				element: mainArea,
-				// element: document.body,
 				engine: engine,
 				options: {
 					width,
 					height,
 					showVelocity: true,
-					// wireframes: false
 				},
+			})
+			// fit the render viewport to the scene
+			Render.lookAt(render, {
+				min: { x: 0, y: 0 },
+				max: { x: 800, y: 600 }
 			})
 			Render.run(render)
 
 			let runner = Runner.create()
-
 			Runner.run(runner, engine)
 
-			// add mouse control
-			let mouse = Mouse.create(render.canvas),
-			mouseConstraint = MouseConstraint.create(engine, {
+			this.addMouseControl()
+
+		},
+		addMouseControl() {
+			let { engine, render } = this
+			let { world } = engine
+			let mouse = Mouse.create(render.canvas)
+			let mouseConstraint = MouseConstraint.create(engine, {
 				mouse: mouse,
 				constraint: {
 					stiffness: 0.2,
@@ -146,16 +128,12 @@ export default {
 					}
 				}
 			})
+
 			World.add(world, mouseConstraint)
+
 			// keep the mouse in sync with rendering
 			render.mouse = mouse
-
-			// fit the render viewport to the scene
-			Render.lookAt(render, {
-				min: { x: 0, y: 0 },
-				max: { x: 800, y: 600 }
-			})
-		},
+		}
 	},
 
 
