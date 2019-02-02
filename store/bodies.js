@@ -3,6 +3,7 @@ export const state = function() {
 		// bodies: [],
 		bodies: [
 			{
+				id: 1,
 				type: 'Circle',
 				geometryPercent: {
 					x: 0.5,
@@ -13,22 +14,25 @@ export const state = function() {
 					friction: 0.1,
 					frictionAir: 0.001,
 					restitution: 1,
+					// isStatic: true,
 				}
 			},
+			// {
+			// 	id: 2,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.5,
+			// 		y: 0,
+			// 		width: 1,
+			// 		height: 1 / 12,
+			// 	},
+			// 	physic: {
+			// 		isStatic: true,
+			// 		restitution: 1
+			// 	}
+			// },
 			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.5,
-					y: 0,
-					width: 1,
-					height: 1 / 12,
-				},
-				physic: {
-					isStatic: true,
-					restitution: 1
-				}
-			},
-			{
+				id: 3,
 				type: 'Rectangle',
 				geometryPercent: {
 					x: 0.5,
@@ -40,68 +44,73 @@ export const state = function() {
 					isStatic: true,
 				}
 			},
-			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 1,
-					y: 0.5,
-					width: 1 / 12,
-					height: 2,
-				},
-				physic: {
-					isStatic: true,
-					restitution: 1
-				}
-			},
-			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0,
-					y: 0.5,
-					width: 1 / 12,
-					height: 1,
-				},
-				physic: {
-					isStatic: true,
-					restitution: 1
-				}
-			},
-			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.25,
-					y: 1 / 6,
-					width: 0.08,
-					height: 0.1,
-				},
-				physic: {
-					frictionAir: 0.001
-				}
-			},
-			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.50,
-					y: 1 / 6,
-					width: 0.08,
-					height: 0.1,
-				},
-				physic: {
-					frictionAir: 0.05
-				}
-			},
-			{
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.75,
-					y: 1 / 6,
-					width: 0.08,
-					height: 0.1,
-				},
-				physic: {
-					frictionAir: 0.1
-				}
-			},
+			// {
+			// 	id: 4,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 1,
+			// 		y: 0.5,
+			// 		width: 1 / 12,
+			// 		height: 2,
+			// 	},
+			// 	physic: {
+			// 		isStatic: true,
+			// 		restitution: 1
+			// 	}
+			// },
+			// {
+			// 	id: 5,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0,
+			// 		y: 0.5,
+			// 		width: 1 / 12,
+			// 		height: 1,
+			// 	},
+			// 	physic: {
+			// 		isStatic: true,
+			// 		restitution: 1
+			// 	}
+			// },
+			// {
+			// 	id: 6,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.25,
+			// 		y: 1 / 6,
+			// 		width: 0.08,
+			// 		height: 0.1,
+			// 	},
+			// 	physic: {
+			// 		frictionAir: 0.001
+			// 	}
+			// },
+			// {
+			// 	id: 7,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.50,
+			// 		y: 1 / 6,
+			// 		width: 0.08,
+			// 		height: 0.1,
+			// 	},
+			// 	physic: {
+			// 		frictionAir: 0.05
+			// 	}
+			// },
+			// {
+			// 	id: 8,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.75,
+			// 		y: 1 / 6,
+			// 		width: 0.08,
+			// 		height: 0.1,
+			// 	},
+			// 	physic: {
+			// 		frictionAir: 0.1
+			// 	}
+			// },
 		]
 	}
 }

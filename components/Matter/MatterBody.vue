@@ -1,5 +1,5 @@
 <script>
-	import { World, Bodies } from 'matter-js'
+	import { Composite, World, Bodies } from 'matter-js'
 
 	export default {
 		render: function() {
@@ -43,9 +43,13 @@
 		},
 		methods: {
 			addBody: function() {
+				console.log('addBody')
+				console.log('this.height', this.height)
+
 				World.add(this.world, this.body)
 			},
 			removeBody: function() {
+				console.log('removeBody')
 				World.remove(this.world, this.body)
 			},
 			computeGeometry: function() {

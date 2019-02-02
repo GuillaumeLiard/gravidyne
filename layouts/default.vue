@@ -3,13 +3,9 @@
 		<Navigation/>
 		<Toolbar :title="title"/>
 		<v-content>
-			<v-container fluid>
-				<v-container grid-list-md>
-					<router-view>
-						<nuxt/>
-					</router-view>
-				</v-container>
-			</v-container>
+			<router-view>
+				<nuxt/>
+			</router-view>
 		</v-content>
 	<v-footer app></v-footer>
 </v-app>

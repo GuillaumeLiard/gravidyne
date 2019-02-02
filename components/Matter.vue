@@ -3,9 +3,9 @@
 		<div class="virtual">
 			<div class="bodies">
 				<component
-				v-for="(body, index) in bodies"
+				v-for="(body) in bodies"
 				:is="getComponentByType(body.type)"
-				:key="index"
+				:key="resizeToken + body.id"
 				:world="world"
 				:width="width"
 				:height="height"
@@ -13,10 +13,10 @@
 				:physic="body.physic"
 				/>
 			</div>
-			<div class="constraints">
+			<!-- <div class="constraints">
 				<MatterConstraint
 				v-for="(constraint, index) in constraints"
-				:key="index"
+				:key="resizeToken + index"
 				:world="world"
 				:width="width"
 				:height="height"
@@ -24,13 +24,14 @@
 				:geometryPercentPointA="constraint.geometryPercentPointA"
 				:idBodyB="constraint.idBodyB"
 				/>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
 
 <script>
 import {
+	Composite,
 	Engine,
 	Runner,
 	Mouse,
@@ -54,6 +55,7 @@ export default {
 			width: 800,
 			height: 600,
 			world: null,
+			resizeToken: 0
 		}
 	},
 	computed: {
@@ -62,15 +64,126 @@ export default {
 		},
 		constraints: function() {
 			return this.$store.getters['constraints/getConstraints']
-		}
+		},
 	},
 	beforeMount: function() {
-		this.initMatterEngine()
+		// this.initMatterEngine()
+		this.build()
 	},
 	mounted: function() {
-		this.initMatterRender()
+		// this.build()
+		// this.build()
+		// this.initMatterRender()
+		this.buildRenderer()
+		this.buildRunner()
+		// this.addMouseControl()
+		// Render.run(this.render)
+		// this.runnerRun()
+		// window.addEventListener('resize', this.resize)
+		// this.resize()
 	},
 	methods: {
+		build: function() {
+			this.buildEngine()
+			// this.buildRunner()
+			// this.buildRenderer()
+			// this.buildWorld()
+		},
+		buildEngine: function() {
+			// this.engine = this.engine ? this.engine : Engine.create()
+			this.engine = Engine.create()
+			this.world = this.engine.world
+		},
+		buildRunner: function() {
+			this.runner = Runner.create()
+			Runner.run(this.runner, this.engine)
+		},
+		buildRenderer: function() {
+			const { engine, width, height } = this
+			const { mainArea } = this.$refs
+
+			this.renderer = Render.create({
+				element: mainArea,
+				engine: this.engine,
+				options: {
+					width,
+					height,
+					showVelocity: true,
+					pixelRatio: 'auto'
+				},
+			})
+			// this.renderer.canvas.setAttribute('width', width)
+			// this.renderer.canvas.setAttribute('height', height)
+			// render.canvas.height = height
+			Render.lookAt(this.renderer, {
+				min: { x: 0, y: 0 },
+				max: { x: width, y: height }
+			})
+			Render.run(this.renderer)
+		},
+		destroy: function() {
+			this.destroyRenderer()
+			this.destroyRunner()
+			this.destroyEngine()
+		},
+
+		destroyRenderer: function() {
+			this.renderer = null
+		},
+		destroyRunner: function() {
+			Runner.stop(this.runner)
+			this.runner = null
+		},
+		destroyEngine: function() {
+			this.world = null
+			Engine.clear(this.engine)
+			this.engine = null
+		},
+		updated: function() {
+
+		},
+		// runnerRun: function() {
+		// 	const {engine} = this
+		// 	let runner = Runner.create()
+		// 	Runner.run(runner, engine)
+		// },
+		// resize: function() {
+		// 	// const {
+		// 	// 	width,
+		// 	// 	height,
+		// 	// } = this
+		// 	// const {
+		// 	// 	width,
+		// 	// 	height,
+		// 	// } = this.$el.getBoundingClientRect()
+		// 	let {
+		// 		engine,
+		// 		render,
+		// 	} = this
+		//
+		// 	Engine.clear(engine)
+		//
+		// 	// console.log(this.viewport)
+		// 	this.width = window.innerWidth
+		// 	this.height = window.innerHeight
+		//
+		// 	// this.resizeToken++
+		// 	// this.render.canvas.remove()
+		// 	this.initMatterRender()
+		//
+		// },
+		// updateRendererSize: function() {
+		// 	// let { render, width, height } = this
+		// 	let { render} = this
+		// 	const { width, height } = this
+		// 	render.canvas.setAttribute('width', width)
+		// 	render.canvas.setAttribute('height', height)
+		// 	// render.canvas.height = height
+		// 	Render.lookAt(render, {
+		// 		min: { x: 0, y: 0 },
+		// 		max: { x: width, y: height }
+		// 	})
+		// },
 		getComponentByType: function(type) {
 			switch(type) {
 				case 'Circle' :
@@ -79,41 +192,50 @@ export default {
 					return MatterBodyRectangle
 			}
 		},
-		initMatterEngine: function() {
-			this.engine = Engine.create()
-			this.world = this.engine.world
-		},
+		// initMatterEngine: function() {
+		// 	this.engine = Engine.create()
+		// 	this.world = this.engine.world
+		// },
 
-		initMatterRender: function() {
-			const { mainArea } = this.$refs
-			let {
-				engine,
-				width,
-				height,
-			} = this
-
-			let render = this.render = Render.create({
-				element: mainArea,
-				engine: engine,
-				options: {
-					width,
-					height,
-					showVelocity: true,
-				},
-			})
-			// fit the render viewport to the scene
-			Render.lookAt(render, {
-				min: { x: 0, y: 0 },
-				max: { x: 800, y: 600 }
-			})
-			Render.run(render)
-
-			let runner = Runner.create()
-			Runner.run(runner, engine)
-
-			this.addMouseControl()
-
-		},
+		// initMatterRender: function() {
+		// 	const { mainArea } = this.$refs
+		// 	let {
+		// 		engine,
+		// 	} = this
+		// 	let {
+		// 		width,
+		// 		height,
+		// 	} = this
+		//
+		// 	if (this.render) {
+		// 		console.log('a')
+		// 		// Matter.Render.stop(render)
+		// 		this.engine.enabled = false
+		// 		Render.stop(this.render)
+		// 	}
+		// 	this.render = Render.create({
+		// 		element: mainArea,
+		// 		engine: engine,
+		// 		options: {
+		// 			width,
+		// 			height,
+		// 			showVelocity: true,
+		// 			pixelRatio: 'auto'
+		// 		},
+		// 	})
+		// 	return;
+		// 	// fit the render viewport to the scene
+		// 	// Render.lookAt(render, {
+		// 	// 	min: { x: 0, y: 0 },
+		// 	// 	max: { x: 800, y: 600 }
+		// 	// })
+		// 	// Render.run(render)
+		//
+		// 	// let runner = Runner.create()
+		// 	// Runner.run(runner, engine)
+		//
+		// 	// this.addMouseControl()
+		// },
 		addMouseControl() {
 			let { engine, render } = this
 			let { world } = engine
