@@ -75,32 +75,13 @@ export default {
 		},
 	},
 	mounted: function() {
-		// this.build()
-		// this.destroy()
-		// for (let i = 0; i< 100; i++) {
-		// 	console.log('rebuild')
-		// 	this.build()
-		// 	this.destroy()
-		// }
 		this.build()
-		// setTimeout(() => {
-
-			// this.reset(500)
-		// },0)
-		// this.destroy()
-		// this.build()
-		// this.destroy()
-		// this.build()
-		// this.addMouseControl()
-		// Render.run(this.render)
-		// this.runnerRun()
 		// window.addEventListener('resize', this.resize)
 		// this.resize()
 	},
 	methods: {
 		reset: function(x = 1) {
 			const bodies = Composite.allBodies(this.engine.world)
-			console.log("bodies before", bodies);
 			for (let i = 0; i< x; i++) {
 				console.log('rebuild')
 				this.destroy()
@@ -108,15 +89,11 @@ export default {
 				this.resizeToken++
 			}
 			const bodiesAfter = Composite.allBodies(this.engine.world)
-			console.log("bodies after", bodiesAfter);
-			// this.build()
 		},
 		build: function() {
 			this.buildEngine()
 			this.buildRunner()
 			this.buildRenderer()
-
-			// this.buildWorld()
 		},
 		destroy: function() {
 			this.destroyRenderer()
@@ -127,11 +104,8 @@ export default {
 			this.engine = Engine.create()
 		},
 		buildRunner: function() {
-			if (!this.runner) {
-				this.runner = Runner.create()
-			}
+			this.runner = Runner.create()
 			Runner.run(this.runner, this.engine)
-			// runner = Engine.run(engine)
 		},
 		buildRenderer: function() {
 			const { engine, width, height } = this
@@ -159,18 +133,14 @@ export default {
 
 
 		destroyRenderer: function() {
-			// console.log(this.renderer.canvas)
-			Render.stop(this.renderer)
 			const { parentNode } = this.renderer.canvas
-			// console.log(parentNode)
+			Render.stop(this.renderer)
 			parentNode.removeChild(this.renderer.canvas)
-			// this.renderer.canvas.remove()
-			// delete this.renderer.canvas
 			this.renderer = null
 		},
 		destroyRunner: function() {
 			Runner.stop(this.runner)
-			// this.runner = null
+			this.runner = null
 		},
 		destroyEngine: function() {
 			this.world = null
@@ -231,50 +201,6 @@ export default {
 					return MatterBodyRectangle
 			}
 		},
-		// initMatterEngine: function() {
-		// 	this.engine = Engine.create()
-		// 	this.world = this.engine.world
-		// },
-
-		// initMatterRender: function() {
-		// 	const { mainArea } = this.$refs
-		// 	let {
-		// 		engine,
-		// 	} = this
-		// 	let {
-		// 		width,
-		// 		height,
-		// 	} = this
-		//
-		// 	if (this.render) {
-		// 		console.log('a')
-		// 		// Matter.Render.stop(render)
-		// 		this.engine.enabled = false
-		// 		Render.stop(this.render)
-		// 	}
-		// 	this.render = Render.create({
-		// 		element: mainArea,
-		// 		engine: engine,
-		// 		options: {
-		// 			width,
-		// 			height,
-		// 			showVelocity: true,
-		// 			pixelRatio: 'auto'
-		// 		},
-		// 	})
-		// 	return;
-		// 	// fit the render viewport to the scene
-		// 	// Render.lookAt(render, {
-		// 	// 	min: { x: 0, y: 0 },
-		// 	// 	max: { x: 800, y: 600 }
-		// 	// })
-		// 	// Render.run(render)
-		//
-		// 	// let runner = Runner.create()
-		// 	// Runner.run(runner, engine)
-		//
-		// 	// this.addMouseControl()
-		// },
 		addMouseControl() {
 			let { engine, render } = this
 			let { world } = engine
