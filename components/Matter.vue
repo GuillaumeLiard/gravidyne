@@ -75,16 +75,16 @@ export default {
 		},
 	},
 	mounted: function() {
+		this.resize()
 		this.build()
-		// window.addEventListener('resize', this.resize)
-		// this.resize()
+		window.addEventListener('resize', () => this.reset())
 	},
 	methods: {
 		reset: function(x = 1) {
 			const bodies = Composite.allBodies(this.engine.world)
 			for (let i = 0; i< x; i++) {
-				console.log('rebuild')
 				this.destroy()
+				this.resize()
 				this.build()
 				this.resizeToken++
 			}
@@ -121,17 +121,12 @@ export default {
 					pixelRatio: 'auto'
 				},
 			})
-			// this.renderer.canvas.setAttribute('width', width)
-			// this.renderer.canvas.setAttribute('height', height)
-			// render.canvas.height = height
 			Render.lookAt(this.renderer, {
 				min: { x: 0, y: 0 },
 				max: { x: width, y: height }
 			})
 			Render.run(this.renderer)
 		},
-
-
 		destroyRenderer: function() {
 			const { parentNode } = this.renderer.canvas
 			Render.stop(this.renderer)
@@ -151,48 +146,10 @@ export default {
 		updated: function() {
 
 		},
-		// runnerRun: function() {
-		// 	const {engine} = this
-		// 	let runner = Runner.create()
-		// 	Runner.run(runner, engine)
-		// },
-		// resize: function() {
-		// 	// const {
-		// 	// 	width,
-		// 	// 	height,
-		// 	// } = this
-		// 	// const {
-		// 	// 	width,
-		// 	// 	height,
-		// 	// } = this.$el.getBoundingClientRect()
-		// 	let {
-		// 		engine,
-		// 		render,
-		// 	} = this
-		//
-		// 	Engine.clear(engine)
-		//
-		// 	// console.log(this.viewport)
-		// 	this.width = window.innerWidth
-		// 	this.height = window.innerHeight
-		//
-		// 	// this.resizeToken++
-		// 	// this.render.canvas.remove()
-		// 	this.initMatterRender()
-		//
-		// },
-		// updateRendererSize: function() {
-		// 	// let { render, width, height } = this
-		// 	let { render} = this
-		// 	const { width, height } = this
-		// 	render.canvas.setAttribute('width', width)
-		// 	render.canvas.setAttribute('height', height)
-		// 	// render.canvas.height = height
-		// 	Render.lookAt(render, {
-		// 		min: { x: 0, y: 0 },
-		// 		max: { x: width, y: height }
-		// 	})
-		// },
+		resize: function() {
+			this.width = window.innerWidth
+			this.height = window.innerHeight
+		},
 		getComponentByType: function(type) {
 			switch(type) {
 				case 'Circle' :
