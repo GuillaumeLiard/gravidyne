@@ -1,12 +1,18 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
+			<Button @click="reset(100)">
+			<!-- <Button @click="reset(1)"> -->
+			<!-- <Button @click="abc++"> -->
+				Reset {{abc}}
+			</Button>
 			<div class="bodies">
 				<component
+				v-if="engine"
 				v-for="(body) in bodies"
 				:is="getComponentByType(body.type)"
 				:key="resizeToken + body.id"
-				:world="world"
+				:world="engine.world"
 				:width="width"
 				:height="height"
 				:geometryPercent="body.geometryPercent"
@@ -54,8 +60,10 @@ export default {
 		return {
 			width: 800,
 			height: 600,
+			engine: null,
 			world: null,
-			resizeToken: 0
+			resizeToken: 0,
+			abc: 1,
 		}
 	},
 	computed: {
@@ -66,16 +74,23 @@ export default {
 			return this.$store.getters['constraints/getConstraints']
 		},
 	},
-	beforeMount: function() {
-		// this.initMatterEngine()
-		this.build()
-	},
 	mounted: function() {
 		// this.build()
+		// this.destroy()
+		// for (let i = 0; i< 100; i++) {
+		// 	console.log('rebuild')
+		// 	this.build()
+		// 	this.destroy()
+		// }
+		this.build()
+		// setTimeout(() => {
+
+			// this.reset(500)
+		// },0)
+		// this.destroy()
 		// this.build()
-		// this.initMatterRender()
-		this.buildRenderer()
-		this.buildRunner()
+		// this.destroy()
+		// this.build()
 		// this.addMouseControl()
 		// Render.run(this.render)
 		// this.runnerRun()
@@ -83,20 +98,40 @@ export default {
 		// this.resize()
 	},
 	methods: {
+		reset: function(x = 1) {
+			const bodies = Composite.allBodies(this.engine.world)
+			console.log("bodies before", bodies);
+			for (let i = 0; i< x; i++) {
+				console.log('rebuild')
+				this.destroy()
+				this.build()
+				this.resizeToken++
+			}
+			const bodiesAfter = Composite.allBodies(this.engine.world)
+			console.log("bodies after", bodiesAfter);
+			// this.build()
+		},
 		build: function() {
 			this.buildEngine()
-			// this.buildRunner()
-			// this.buildRenderer()
+			this.buildRunner()
+			this.buildRenderer()
+
 			// this.buildWorld()
 		},
+		destroy: function() {
+			this.destroyRenderer()
+			this.destroyRunner()
+			this.destroyEngine()
+		},
 		buildEngine: function() {
-			// this.engine = this.engine ? this.engine : Engine.create()
 			this.engine = Engine.create()
-			this.world = this.engine.world
 		},
 		buildRunner: function() {
-			this.runner = Runner.create()
+			if (!this.runner) {
+				this.runner = Runner.create()
+			}
 			Runner.run(this.runner, this.engine)
+			// runner = Engine.run(engine)
 		},
 		buildRenderer: function() {
 			const { engine, width, height } = this
@@ -121,22 +156,26 @@ export default {
 			})
 			Render.run(this.renderer)
 		},
-		destroy: function() {
-			this.destroyRenderer()
-			this.destroyRunner()
-			this.destroyEngine()
-		},
+
 
 		destroyRenderer: function() {
+			// console.log(this.renderer.canvas)
+			Render.stop(this.renderer)
+			const { parentNode } = this.renderer.canvas
+			// console.log(parentNode)
+			parentNode.removeChild(this.renderer.canvas)
+			// this.renderer.canvas.remove()
+			// delete this.renderer.canvas
 			this.renderer = null
 		},
 		destroyRunner: function() {
 			Runner.stop(this.runner)
-			this.runner = null
+			// this.runner = null
 		},
 		destroyEngine: function() {
 			this.world = null
 			Engine.clear(this.engine)
+			this.engine.events = {}
 			this.engine = null
 		},
 		updated: function() {
