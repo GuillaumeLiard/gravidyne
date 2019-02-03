@@ -1,11 +1,6 @@
 <template>
 	<div ref="mainArea">
 		<div class="virtual">
-			<Button @click="reset(100)">
-			<!-- <Button @click="reset(1)"> -->
-			<!-- <Button @click="abc++"> -->
-				Reset {{abc}}
-			</Button>
 			<div class="bodies">
 				<component
 				v-if="engine"
@@ -147,8 +142,12 @@ export default {
 
 		},
 		resize: function() {
+			const {height} = document.querySelector('.v-toolbar__content').getBoundingClientRect()
+			const paddingTop = document.querySelector('main.v-content').style.paddingTop
+			const [px] = paddingTop.split('px')
+			const offset = parseInt(px)
 			this.width = window.innerWidth
-			this.height = window.innerHeight
+			this.height = window.innerHeight - height - offset
 		},
 		getComponentByType: function(type) {
 			switch(type) {
