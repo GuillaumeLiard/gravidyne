@@ -44,34 +44,34 @@ export const state = function() {
 					isStatic: true,
 				}
 			},
-			// {
-			// 	id: 4,
-			// 	type: 'Rectangle',
-			// 	initialGeometryPercent: {
-			// 		x: 1,
-			// 		y: 0.5,
-			// 		width: 1 / 12,
-			// 		height: 2,
-			// 	},
-			// 	physic: {
-			// 		isStatic: true,
-			// 		restitution: 1
-			// 	}
-			// },
-			// {
-			// 	id: 5,
-			// 	type: 'Rectangle',
-			// 	initialGeometryPercent: {
-			// 		x: 0,
-			// 		y: 0.5,
-			// 		width: 1 / 12,
-			// 		height: 1,
-			// 	},
-			// 	physic: {
-			// 		isStatic: true,
-			// 		restitution: 1
-			// 	}
-			// },
+			{
+				id: 4,
+				type: 'Rectangle',
+				initialGeometryPercent: {
+					x: 1,
+					y: 0.5,
+					width: 1 / 12,
+					height: 2,
+				},
+				physic: {
+					isStatic: true,
+					restitution: 1
+				}
+			},
+			{
+				id: 5,
+				type: 'Rectangle',
+				initialGeometryPercent: {
+					x: 0,
+					y: 0.5,
+					width: 1 / 12,
+					height: 1,
+				},
+				physic: {
+					isStatic: true,
+					restitution: 1
+				}
+			},
 			// {
 			// 	id: 6,
 			// 	type: 'Rectangle',
