@@ -39,7 +39,6 @@
 			},
 			geometry: function() {
 				const { geometryPercent, sceneBounds } = this
-				// console.log('geometryPercent', geometryPercent)
 				return this.percentToAbsolute(geometryPercent, sceneBounds)
 			},
 		},
@@ -58,10 +57,15 @@
 			sceneBounds: function(newBounds, oldBounds) {
 				const {geometry} = this
 				const {position} = this.body ? this.body : {}
-				let g = position || geometry
-				g.radius = geometry.radius
-				const bounds = oldBounds || newBounds
-				this.savedGeometryPercent = this.absoluteToPercent(g, bounds )
+				const g = {
+					...geometry,
+					...position,
+				}
+				const bounds = {
+					...newBounds,
+					...oldBounds,
+				}
+				this.savedGeometryPercent = this.absoluteToPercent(g, bounds)
 			},
 			geometry: function() {
 				this.body = this.createBody()

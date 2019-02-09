@@ -17,37 +17,37 @@ export const state = function() {
 					// isStatic: true,
 				}
 			},
-			// {
-			// 	id: 2,
-			// 	type: 'Rectangle',
-			// 	geometryPercent: {
-			// 		x: 0.5,
-			// 		y: 0,
-			// 		width: 1,
-			// 		height: 1 / 12,
-			// 	},
-			// 	physic: {
-			// 		isStatic: true,
-			// 		restitution: 1
-			// 	}
-			// },
-			// {
-			// 	id: 3,
-			// 	type: 'Rectangle',
-			// 	geometryPercent: {
-			// 		x: 0.5,
-			// 		y: 1,
-			// 		width: 1,
-			// 		height: 1 / 12,
-			// 	},
-			// 	physic: {
-			// 		isStatic: true,
-			// 	}
-			// },
+			{
+				id: 2,
+				type: 'Rectangle',
+				initialGeometryPercent: {
+					x: 0.5,
+					y: 0,
+					width: 1,
+					height: 1 / 12,
+				},
+				physic: {
+					isStatic: true,
+					restitution: 1
+				}
+			},
+			{
+				id: 3,
+				type: 'Rectangle',
+				initialGeometryPercent: {
+					x: 0.5,
+					y: 1,
+					width: 1,
+					height: 1 / 12,
+				},
+				physic: {
+					isStatic: true,
+				}
+			},
 			// {
 			// 	id: 4,
 			// 	type: 'Rectangle',
-			// 	geometryPercent: {
+			// 	initialGeometryPercent: {
 			// 		x: 1,
 			// 		y: 0.5,
 			// 		width: 1 / 12,
@@ -61,7 +61,7 @@ export const state = function() {
 			// {
 			// 	id: 5,
 			// 	type: 'Rectangle',
-			// 	geometryPercent: {
+			// 	initialGeometryPercent: {
 			// 		x: 0,
 			// 		y: 0.5,
 			// 		width: 1 / 12,
@@ -75,7 +75,7 @@ export const state = function() {
 			// {
 			// 	id: 6,
 			// 	type: 'Rectangle',
-			// 	geometryPercent: {
+			// 	initialGeometryPercent: {
 			// 		x: 0.25,
 			// 		y: 1 / 6,
 			// 		width: 0.08,
@@ -88,7 +88,7 @@ export const state = function() {
 			// {
 			// 	id: 7,
 			// 	type: 'Rectangle',
-			// 	geometryPercent: {
+			// 	initialGeometryPercent: {
 			// 		x: 0.50,
 			// 		y: 1 / 6,
 			// 		width: 0.08,
@@ -101,7 +101,7 @@ export const state = function() {
 			// {
 			// 	id: 8,
 			// 	type: 'Rectangle',
-			// 	geometryPercent: {
+			// 	initialGeometryPercent: {
 			// 		x: 0.75,
 			// 		y: 1 / 6,
 			// 		width: 0.08,

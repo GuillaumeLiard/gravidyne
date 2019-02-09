@@ -5,22 +5,26 @@
 
 	export default {
 		extends: MatterBody,
-		computed: {
-			geometry: function() {
-				const { geometryPercent: gp, sceneBounds } = this
-				const { width, height } = sceneBounds
-				return {
-					x: gp.x * width,
-					y: gp.y * height,
-					width: gp.width * width,
-					height: gp.height * height,
-				}
-			},
-		},
 		methods: {
 			createBody: function() {
 				const { geometry: geo, physic } = this
 				return Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
+			},
+			percentToAbsolute: function({x, y, width, height}, {width: sceneWidth, height: sceneHeight}) {
+				return {
+					x: x * sceneWidth,
+					y: y * sceneHeight,
+					width: width * sceneWidth,
+					height: height * sceneHeight,
+				}
+			},
+			absoluteToPercent: function({x, y, width, height}, {width: sceneWidth, height: sceneHeight}) {
+				return {
+					x: x / sceneWidth,
+					y: y / sceneHeight,
+					width: width / sceneWidth,
+					height: height / sceneHeight,
+				}
 			},
 		},
 	}
