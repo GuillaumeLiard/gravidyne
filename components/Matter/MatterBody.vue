@@ -37,6 +37,7 @@
 		},
 		mounted: function() {
 			this.addBody()
+			console.log('mounted')
 		},
 		beforeDestroy: function() {
 			this.removeBody()
