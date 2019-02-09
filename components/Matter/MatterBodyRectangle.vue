@@ -9,14 +9,15 @@
 			computeGeometry: function() {
 				const { gp } = this.geometryPercent
 				return {
-					x: this.geometryPercent.x * this.width,
-					y: this.geometryPercent.y * this.height,
-					width: this.geometryPercent.width * this.width,
-					height: this.geometryPercent.height * this.height,
+					x: gp.x * this.width,
+					y: gp.y * this.height,
+					width: gp.width * this.width,
+					height: gp.height * this.height,
 				}
 			},
 			createBody: function(physic) {
-				return Bodies.rectangle(this.geometry.x, this.geometry.y, this.geometry.width, this.geometry.height, {...physic})
+				const { geo } = this
+				return Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
 			},
 		},
 	}

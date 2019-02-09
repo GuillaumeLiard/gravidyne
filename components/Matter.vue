@@ -32,7 +32,6 @@
 
 <script>
 import {
-	Composite,
 	Engine,
 	Runner,
 	Mouse,
@@ -76,14 +75,12 @@ export default {
 	},
 	methods: {
 		reset: function(x = 1) {
-			const bodies = Composite.allBodies(this.engine.world)
 			for (let i = 0; i< x; i++) {
 				this.destroy()
 				this.resize()
 				this.build()
 				this.resizeToken++
 			}
-			const bodiesAfter = Composite.allBodies(this.engine.world)
 		},
 		build: function() {
 			this.buildEngine()
@@ -103,7 +100,7 @@ export default {
 			Runner.run(this.runner, this.engine)
 		},
 		buildRenderer: function() {
-			const { engine, width, height } = this
+			const { width, height } = this
 			const { mainArea } = this.$refs
 
 			this.renderer = Render.create({

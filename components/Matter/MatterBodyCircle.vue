@@ -9,13 +9,14 @@
 			computeGeometry: function() {
 				const { gp } = this.geometryPercent
 				return {
-					x: this.geometryPercent.x * this.width,
-					y: this.geometryPercent.y * this.height,
-					radius: this.geometryPercent.radius * this.height,
+					x: gp.x * this.width,
+					y: gp.y * this.height,
+					radius: gp.radius * this.height,
 				}
 			},
 			createBody: function(physic) {
-				return Bodies.circle(this.geometry.x, this.geometry.y, this.geometry.radius, {...physic})
+				const { geo } = this
+				return Bodies.circle(geo.x, geo.y, geo.radius, {...physic})
 			},
 		},
 	}
