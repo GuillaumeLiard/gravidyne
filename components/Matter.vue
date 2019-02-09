@@ -9,7 +9,7 @@
 					:key="resizeToken + body.id"
 					:world="engine.world"
 					:sceneBounds="{width, height}"
-					:geometryPercent="body.geometryPercent"
+					:initialGeometryPercent="body.initialGeometryPercent"
 					:physic="body.physic"
 				/>
 			</div>

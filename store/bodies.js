@@ -5,7 +5,7 @@ export const state = function() {
 			{
 				id: 1,
 				type: 'Circle',
-				geometryPercent: {
+				initialGeometryPercent: {
 					x: 0.5,
 					y: 0.5,
 					radius: 0.2,
@@ -17,33 +17,33 @@ export const state = function() {
 					// isStatic: true,
 				}
 			},
-			{
-				id: 2,
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.5,
-					y: 0,
-					width: 1,
-					height: 1 / 12,
-				},
-				physic: {
-					isStatic: true,
-					restitution: 1
-				}
-			},
-			{
-				id: 3,
-				type: 'Rectangle',
-				geometryPercent: {
-					x: 0.5,
-					y: 1,
-					width: 1,
-					height: 1 / 12,
-				},
-				physic: {
-					isStatic: true,
-				}
-			},
+			// {
+			// 	id: 2,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.5,
+			// 		y: 0,
+			// 		width: 1,
+			// 		height: 1 / 12,
+			// 	},
+			// 	physic: {
+			// 		isStatic: true,
+			// 		restitution: 1
+			// 	}
+			// },
+			// {
+			// 	id: 3,
+			// 	type: 'Rectangle',
+			// 	geometryPercent: {
+			// 		x: 0.5,
+			// 		y: 1,
+			// 		width: 1,
+			// 		height: 1 / 12,
+			// 	},
+			// 	physic: {
+			// 		isStatic: true,
+			// 	}
+			// },
 			// {
 			// 	id: 4,
 			// 	type: 'Rectangle',

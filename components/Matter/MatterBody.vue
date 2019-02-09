@@ -7,7 +7,8 @@
 		},
 		data: function() {
 			return {
-				body: null
+				body: null,
+				savedGeometryPercent: null,
 			}
 		},
 		props: {
@@ -22,7 +23,7 @@
 					height: 0,
 				})
 			},
-			geometryPercent: {
+			initialGeometryPercent: {
 				type: Object,
 				default: () => {}
 			},
@@ -32,16 +33,30 @@
 			},
 		},
 		computed: {
-			geometry: function() { // Virtual property to implement in extended component
-				return null
+			geometryPercent: function() {
+				let { savedGeometryPercent: sgp, initialGeometryPercent: igp } = this
+				return sgp || igp
+			},
+			geometry: function() {
+				const { sceneBounds } = this
+				return this.percentToAbsolute(sceneBounds)
 			},
 		},
 		methods: {
 			createBody: function() { // Virtual method to implement in extended component
 				return null
 			},
+			percentToAbsolute: function() { // Virtual method to implement in extended component
+				return null
+			},
+			absoluteToPercent: function() { // Virtual method to implement in extended component
+				return null
+			},
 		},
 		watch: {
+			sceneBounds: function(newBounds, oldBounds) {
+				this.savedGeometryPercent = this.absoluteToPercent(oldBounds)
+			},
 			geometry: function() {
 				this.body = this.createBody()
 			},
