@@ -5,8 +5,8 @@
 
 	export default {
 		extends: MatterBody,
-		methods: {
-			computeGeometry: function() {
+		computed: {
+			geometry: function() {
 				const { geometryPercent: gp } = this
 				return {
 					x: gp.x * this.width,
@@ -14,6 +14,8 @@
 					radius: gp.radius * this.height,
 				}
 			},
+		},
+		methods: {
 			createBody: function(physic) {
 				let { geometry: geo } = this
 				return Bodies.circle(geo.x, geo.y, geo.radius, {...physic})

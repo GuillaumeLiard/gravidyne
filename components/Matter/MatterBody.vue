@@ -28,8 +28,8 @@
 			},
 		},
 		computed: {
-			geometry: function() {
-				return this.computeGeometry();
+			geometry: function() { // Virtual property to implement in extended component
+				return null
 			},
 			body: function() {
 				return this.createBody(this.physic)
@@ -42,17 +42,14 @@
 			this.removeBody()
 		},
 		methods: {
+			createBody: function() { // Virtual method to implement in extended component
+				return null
+			},
 			addBody: function() {
 				World.add(this.world, this.body)
 			},
 			removeBody: function() {
 				World.remove(this.world, this.body)
-			},
-			computeGeometry: function() {
-				// Virtual method to implement in extended component
-			},
-			createBody: function() {
-				// Virtual method to implement in extended component
 			},
 		},
 	}
