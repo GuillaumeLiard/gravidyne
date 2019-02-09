@@ -10,14 +10,21 @@
 				type: Object,
 				default: () => null
 			},
-			width: {
-				type: Number,
-				default: () => 0
+			sceneBounds: {
+				type: Object,
+				default: () => ({
+					width: 0,
+					height: 0,
+				})
 			},
-			height: {
-				type: Number,
-				default: () => 0
-			},
+			// width: {
+			// 	type: Number,
+			// 	default: () => 0
+			// },
+			// height: {
+			// 	type: Number,
+			// 	default: () => 0
+			// },
 			geometryPercent: {
 				type: Object,
 				default: () => {}
@@ -38,6 +45,9 @@
 		mounted: function() {
 			this.addBody()
 			console.log('mounted')
+		},
+		watch: {
+
 		},
 		beforeDestroy: function() {
 			this.removeBody()

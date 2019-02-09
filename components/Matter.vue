@@ -8,6 +8,7 @@
 				:is="getComponentByType(body.type)"
 				:key="resizeToken + body.id"
 				:world="engine.world"
+				:sceneBounds="{width, height}"
 				:width="width"
 				:height="height"
 				:geometryPercent="body.geometryPercent"
@@ -79,7 +80,7 @@ export default {
 				this.destroy()
 				this.resize()
 				this.build()
-				this.resizeToken++
+				// this.resizeToken++
 			}
 		},
 		build: function() {

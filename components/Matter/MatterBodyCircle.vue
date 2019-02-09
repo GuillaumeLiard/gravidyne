@@ -7,11 +7,12 @@
 		extends: MatterBody,
 		computed: {
 			geometry: function() {
-				const { geometryPercent: gp } = this
+				const { geometryPercent: gp, sceneBounds } = this
+				const { width, height } = sceneBounds
 				return {
-					x: gp.x * this.width,
-					y: gp.y * this.height,
-					radius: gp.radius * this.height,
+					x: gp.x * width,
+					y: gp.y * height,
+					radius: gp.radius * height,
 				}
 			},
 		},
