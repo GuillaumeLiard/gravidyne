@@ -17,8 +17,8 @@
 			},
 		},
 		methods: {
-			createBody: function(physic) {
-				let { geometry: geo } = this
+			createBody: function() {
+				const { geometry: geo, physic } = this
 				return Bodies.circle(geo.x, geo.y, geo.radius, {...physic})
 			},
 		},

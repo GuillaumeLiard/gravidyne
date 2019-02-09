@@ -5,6 +5,11 @@
 		render: function() {
 			return null
 		},
+		data: function() {
+			return {
+				body: null
+			}
+		},
 		props: {
 			world: {
 				type: Object,
@@ -17,14 +22,6 @@
 					height: 0,
 				})
 			},
-			// width: {
-			// 	type: Number,
-			// 	default: () => 0
-			// },
-			// height: {
-			// 	type: Number,
-			// 	default: () => 0
-			// },
 			geometryPercent: {
 				type: Object,
 				default: () => {}
@@ -38,29 +35,19 @@
 			geometry: function() { // Virtual property to implement in extended component
 				return null
 			},
-			body: function() {
-				return this.createBody(this.physic)
-			},
-		},
-		mounted: function() {
-			this.addBody()
-			console.log('mounted')
-		},
-		watch: {
-
-		},
-		beforeDestroy: function() {
-			this.removeBody()
 		},
 		methods: {
 			createBody: function() { // Virtual method to implement in extended component
 				return null
 			},
-			addBody: function() {
-				World.add(this.world, this.body)
+		},
+		watch: {
+			geometry: function() {
+				this.body = this.createBody()
 			},
-			removeBody: function() {
-				World.remove(this.world, this.body)
+			body: function(newBody, oldBody) {
+				if (oldBody) World.remove(this.world, oldBody)
+				World.add(this.world, newBody)
 			},
 		},
 	}
