@@ -7,7 +7,7 @@
 		extends: MatterBody,
 		methods: {
 			computeGeometry: function() {
-				const { gp } = this.geometryPercent
+				const { geometryPercent: gp } = this
 				return {
 					x: gp.x * this.width,
 					y: gp.y * this.height,
@@ -16,7 +16,7 @@
 				}
 			},
 			createBody: function(physic) {
-				const { geo } = this
+				let { geometry: geo } = this
 				return Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
 			},
 		},
