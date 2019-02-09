@@ -3,28 +3,26 @@
 		<div class="virtual">
 			<div class="bodies">
 				<component
-				v-if="engine"
-				v-for="(body) in bodies"
-				:is="getComponentByType(body.type)"
-				:key="resizeToken + body.id"
-				:world="engine.world"
-				:sceneBounds="{width, height}"
-				:width="width"
-				:height="height"
-				:geometryPercent="body.geometryPercent"
-				:physic="body.physic"
+					v-if="engine"
+					v-for="(body) in bodies"
+					:is="getComponentByType(body.type)"
+					:key="resizeToken + body.id"
+					:world="engine.world"
+					:sceneBounds="{width, height}"
+					:geometryPercent="body.geometryPercent"
+					:physic="body.physic"
 				/>
 			</div>
 			<!-- <div class="constraints">
 				<MatterConstraint
-				v-for="(constraint, index) in constraints"
-				:key="resizeToken + index"
-				:world="world"
-				:width="width"
-				:height="height"
-				:physic="constraint.physic"
-				:geometryPercentPointA="constraint.geometryPercentPointA"
-				:idBodyB="constraint.idBodyB"
+					v-for="(constraint, index) in constraints"
+					:key="resizeToken + index"
+					:world="world"
+					:width="width"
+					:height="height"
+					:physic="constraint.physic"
+					:geometryPercentPointA="constraint.geometryPercentPointA"
+					:idBodyB="constraint.idBodyB"
 				/>
 			</div> -->
 		</div>
