@@ -38,8 +38,9 @@
 				return sgp || igp
 			},
 			geometry: function() {
-				const { sceneBounds } = this
-				return this.percentToAbsolute(sceneBounds)
+				const { geometryPercent, sceneBounds } = this
+				// console.log('geometryPercent', geometryPercent)
+				return this.percentToAbsolute(geometryPercent, sceneBounds)
 			},
 		},
 		methods: {
@@ -55,7 +56,12 @@
 		},
 		watch: {
 			sceneBounds: function(newBounds, oldBounds) {
-				this.savedGeometryPercent = this.absoluteToPercent(oldBounds)
+				const {geometry} = this
+				const {position} = this.body ? this.body : {}
+				let g = position || geometry
+				g.radius = geometry.radius
+				const bounds = oldBounds || newBounds
+				this.savedGeometryPercent = this.absoluteToPercent(g, bounds )
 			},
 			geometry: function() {
 				this.body = this.createBody()

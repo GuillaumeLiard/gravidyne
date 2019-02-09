@@ -10,30 +10,18 @@
 				const { geometry: geo, physic } = this
 				return Bodies.circle(geo.x, geo.y, geo.radius, {...physic})
 			},
-			percentToAbsolute: function({ width, height}) {
-				const {
-					geometryPercent: gp,
-				 } = this
+			percentToAbsolute: function({x, y, radius}, {width, height}) {
 				return {
-					x: gp.x * width,
-					y: gp.y * height,
-					radius: gp.radius * height,
+					x: x * width,
+					y: y * height,
+					radius: radius * height,
 				}
 			},
-			absoluteToPercent: function({ width, height}) {
-				const {
-					geometry,
-				 } = this
-				const { position } = this.body ? this.body : {}
-				let g = position || geometry
-				g = {
-					...g,
-					radius: geometry.radius
-				}
+			absoluteToPercent: function({x, y, radius}, { width, height}) {
 				return {
-					x: g.x / width,
-					y: g.y / height,
-					radius: g.radius / height,
+					x: x / width,
+					y: y / height,
+					radius: radius / height,
 				}
 			},
 		},
