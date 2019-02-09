@@ -18,12 +18,13 @@
 					height: height * sceneHeight,
 				}
 			},
-			absoluteToPercent: function({x, y, width, height}, {sceneWidth, sceneHeight}) {
+			absoluteToPercent: function({x, y}, {sceneWidth, sceneHeight}) {
+				const {initialGeometryPercent: igp} = this
 				return {
 					x: x / sceneWidth,
 					y: y / sceneHeight,
-					width: width / sceneWidth,
-					height: height / sceneHeight,
+					width: igp.width,
+					height: igp.height,
 				}
 			},
 		},
