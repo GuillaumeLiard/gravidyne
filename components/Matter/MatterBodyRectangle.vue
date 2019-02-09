@@ -10,7 +10,7 @@
 				const { geometry: geo, physic } = this
 				return Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
 			},
-			percentToAbsolute: function({x, y, width, height}, {width: sceneWidth, height: sceneHeight}) {
+			percentToAbsolute: function({x, y, width, height}, {sceneWidth, sceneHeight}) {
 				return {
 					x: x * sceneWidth,
 					y: y * sceneHeight,
@@ -18,7 +18,7 @@
 					height: height * sceneHeight,
 				}
 			},
-			absoluteToPercent: function({x, y, width, height}, {width: sceneWidth, height: sceneHeight}) {
+			absoluteToPercent: function({x, y, width, height}, {sceneWidth, sceneHeight}) {
 				return {
 					x: x / sceneWidth,
 					y: y / sceneHeight,

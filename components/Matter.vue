@@ -8,7 +8,7 @@
 					:is="getComponentByType(body.type)"
 					:key="resizeToken + body.id"
 					:world="engine.world"
-					:sceneBounds="{width, height}"
+					:sceneBounds="{sceneWidth: width, sceneHeight: height}"
 					:initialGeometryPercent="body.initialGeometryPercent"
 					:physic="body.physic"
 				/>

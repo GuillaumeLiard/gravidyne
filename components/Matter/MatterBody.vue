@@ -19,8 +19,8 @@
 			sceneBounds: {
 				type: Object,
 				default: () => ({
-					width: 0,
-					height: 0,
+					sceneWidth: 0,
+					sceneHeight: 0,
 				})
 			},
 			initialGeometryPercent: {
