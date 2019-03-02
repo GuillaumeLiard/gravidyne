@@ -85,6 +85,7 @@ export default {
 			this.buildEngine()
 			this.buildRunner()
 			this.buildRenderer()
+			this.addMouseControl()
 		},
 		destroy: function() {
 			this.destroyRenderer()
@@ -154,9 +155,9 @@ export default {
 			}
 		},
 		addMouseControl() {
-			let { engine, render } = this
+			let { engine, renderer } = this
 			let { world } = engine
-			let mouse = Mouse.create(render.canvas)
+			let mouse = Mouse.create(renderer.canvas)
 			let mouseConstraint = MouseConstraint.create(engine, {
 				mouse: mouse,
 				constraint: {
@@ -171,7 +172,7 @@ export default {
 			World.add(world, mouseConstraint)
 
 			// keep the mouse in sync with rendering
-			render.mouse = mouse
+			renderer.mouse = mouse
 		}
 	},
 
