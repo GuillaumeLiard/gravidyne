@@ -17,8 +17,8 @@
 			<div class="constraints">
 				<MatterConstraint
 					v-if="engine"
-					v-for="(constraint) in constraints"
-					:key="resizeToken + constraint.id"
+					v-for="(constraint, index) in constraints"
+					:key="resizeToken + index"
 					:world="engine.world"
 					:width="width"
 					:height="height"
