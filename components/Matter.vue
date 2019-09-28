@@ -23,8 +23,10 @@
 					:width="width"
 					:height="height"
 					:physic="constraint.physic"
+					:idBodyA="constraint.idBodyA"
 					:geometryPercentPointA="constraint.geometryPercentPointA"
 					:idBodyB="constraint.idBodyB"
+					:geometryPercentPointB="constraint.geometryPercentPointB"
 				/>
 			</div>
 		</div>

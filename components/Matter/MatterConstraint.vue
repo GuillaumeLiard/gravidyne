@@ -22,6 +22,10 @@
 				type: Object,
 				default: () => {}
 			},
+			idBodyA: {
+				type: Number,
+				default: -1
+			},
 			geometryPercentPointA: {
 				type: Object,
 				default: () => {}
@@ -30,19 +34,33 @@
 				type: Number,
 				default: -1
 			},
+			geometryPercentPointB: {
+				type: Object,
+				default: () => {}
+			},
 		},
 		computed: {
+			constraint: function() {
+				return this.createConstraint(this.physic)
+			},
+			bodyA: function() {
+				const [match] = this.world.bodies.filter(body => body.internalId === this.idBodyA)
+				return match
+			},
 			bodyB: function() {
 				const [match] = this.world.bodies.filter(body => body.internalId === this.idBodyB)
 				return match
-			},
-			constraint: function() {
-				return this.createConstraint(this.physic)
 			},
 			pointA: function() {
 				return {
 					x: this.geometryPercentPointA.x * this.width,
 					y: this.geometryPercentPointA.y * this.height,
+				}
+			},
+			pointB: function() {
+				return {
+					x: this.geometryPercentPointB.x * this.width,
+					y: this.geometryPercentPointB.y * this.height,
 				}
 			},
 		},
@@ -62,10 +80,24 @@
 				if (this.constraint) World.remove(this.world, this.constraint)
 			},
 			createConstraint: function(physic) {
-				if (!this.bodyB || !this.pointA) return null
+				let constraints = {};
+				const availableBodies = [
+					{
+						name: 'bodyA',
+						instance: this.bodyA
+					},
+					{
+						name: 'bodyB',
+						instance: this.bodyB
+					}
+				]
+				for (let body of availableBodies) {
+					if (body.instance) constraints[body.name] = body.instance
+				}
 				return Constraint.create({
 					pointA: this.pointA,
-					bodyB: this.bodyB,
+					pointB: this.pointB,
+					...constraints,
 					...physic,
 				})
 			},

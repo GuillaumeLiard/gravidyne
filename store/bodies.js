@@ -72,19 +72,19 @@ export const state = function() {
 					restitution: 1
 				}
 			},
-			// {
-			// 	id: 6,
-			// 	type: 'Rectangle',
-			// 	initialGeometryPercent: {
-			// 		x: 0.25,
-			// 		y: 1 / 6,
-			// 		width: 0.08,
-			// 		height: 0.1,
-			// 	},
-			// 	physic: {
-			// 		frictionAir: 0.001
-			// 	}
-			// },
+			{
+				id: 6,
+				type: 'Rectangle',
+				initialGeometryPercent: {
+					x: 0.25,
+					y: 1 / 6,
+					width: 0.08,
+					height: 0.1,
+				},
+				physic: {
+					frictionAir: 0.001
+				}
+			},
 			// {
 			// 	id: 7,
 			// 	type: 'Rectangle',
