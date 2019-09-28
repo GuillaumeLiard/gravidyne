@@ -1,5 +1,5 @@
 <script>
-	import { World, Composite, Constraint } from 'matter-js'
+	import { World, Constraint } from 'matter-js'
 
 	export default {
 		render: function() {
@@ -28,15 +28,16 @@
 			},
 			idBodyB: {
 				type: Number,
-				default: 8
+				default: -1
 			},
 		},
 		computed: {
+			bodyB: function() {
+				const [match] = this.world.bodies.filter(body => body.internalId === this.idBodyB)
+				return match
+			},
 			constraint: function() {
 				return this.createConstraint(this.physic)
-			},
-			bodyB: function() {
-				return Composite.get(this.world, this.idBodyB, 'body')
 			},
 			pointA: function() {
 				return {
@@ -54,13 +55,14 @@
 		methods: {
 			addConstraint: function() {
 				setTimeout(() => {
-					World.add(this.world, this.constraint)
+					if (this.constraint) World.add(this.world, this.constraint)
 				}, 0)
 			},
 			removeConstraint: function() {
-				World.remove(this.world, this.constraint)
+				if (this.constraint) World.remove(this.world, this.constraint)
 			},
 			createConstraint: function(physic) {
+				if (!this.bodyB || !this.pointA) return null
 				return Constraint.create({
 					pointA: this.pointA,
 					bodyB: this.bodyB,

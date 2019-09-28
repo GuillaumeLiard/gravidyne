@@ -8,7 +8,9 @@
 		methods: {
 			createBody: function() {
 				const { geometry: geo, physic } = this
-				return Bodies.circle(geo.x, geo.y, geo.radius, {...physic})
+				const circle = Bodies.circle(geo.x, geo.y, geo.radius, {...physic})
+				circle.internalId = this.internalId
+				return circle
 			},
 			percentToAbsolute: function({x, y, radius}, {sceneWidth, sceneHeight}) {
 				return {

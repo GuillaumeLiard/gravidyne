@@ -8,7 +8,9 @@
 		methods: {
 			createBody: function() {
 				const { geometry: geo, physic } = this
-				return Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
+				const rectangle = Bodies.rectangle(geo.x, geo.y, geo.width, geo.height, {...physic})
+				rectangle.internalId = this.internalId
+				return rectangle
 			},
 			percentToAbsolute: function({x, y, width, height}, {sceneWidth, sceneHeight}) {
 				return {

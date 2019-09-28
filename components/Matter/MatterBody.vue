@@ -31,6 +31,10 @@
 				type: Object,
 				default: () => {}
 			},
+			internalId: {
+				type: Number,
+				default: -1
+			},
 		},
 		computed: {
 			geometryPercent: function() {

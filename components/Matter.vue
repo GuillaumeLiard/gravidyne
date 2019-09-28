@@ -6,6 +6,7 @@
 					v-if="engine"
 					v-for="(body) in bodies"
 					:is="getComponentByType(body.type)"
+					:internalId="body.id"
 					:key="resizeToken + body.id"
 					:world="engine.world"
 					:sceneBounds="{sceneWidth: width, sceneHeight: height}"
@@ -13,18 +14,19 @@
 					:physic="body.physic"
 				/>
 			</div>
-			<!-- <div class="constraints">
+			<div class="constraints">
 				<MatterConstraint
-					v-for="(constraint, index) in constraints"
-					:key="resizeToken + index"
-					:world="world"
+					v-if="engine"
+					v-for="(constraint) in constraints"
+					:key="resizeToken + constraint.id"
+					:world="engine.world"
 					:width="width"
 					:height="height"
 					:physic="constraint.physic"
 					:geometryPercentPointA="constraint.geometryPercentPointA"
 					:idBodyB="constraint.idBodyB"
 				/>
-			</div> -->
+			</div>
 		</div>
 	</div>
 </template>
